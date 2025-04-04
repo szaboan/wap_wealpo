@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar({onOpen}) {
   console.log('#1 Navbar, onOpen:', onOpen);
     return (
         <>
         <div className="navbar bg-base-100 shadow-sm">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">wealPO</a>
+          <Link className="btn btn-ghost text-xl" to="/">wealPO</Link>
         </div>
         <div className="flex gap-2">
           <input type="text" placeholder="Keresés..." className="input input-bordered w-24 md:w-auto" />
@@ -26,8 +28,9 @@ export default function Navbar({onOpen}) {
                   <span className="badge">New</span>
                 </a>
               </li>
-              <li><a>Termékek</a></li>
-              <li><a>Beállítások</a></li>
+              <li><Link to="/">Termékek</Link></li>
+              <li><Link to="/profil">Profil</Link></li>
+              <li><Link to="/rolunk">Rólunk</Link></li>
               <li><a>Kilépés</a></li>
             </ul>
           </div>

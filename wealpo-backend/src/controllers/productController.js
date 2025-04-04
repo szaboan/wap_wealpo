@@ -58,7 +58,7 @@ export const deleteProduct = async (req, res) => {
 export const searchProduct = async (req, res) => {
     try {
       const searchTerm = req.query.q; // Get the search term from the query parameters
-      const product = await productService.searchProduct(searchTerm);
+      const product = await productService.searchProducts(searchTerm);
       res.status(200).json(product);
     } catch (error) {
       console.error('Error searching product:', error);

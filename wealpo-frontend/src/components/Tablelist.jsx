@@ -1,4 +1,29 @@
-export default function Tablelist({handleOpen}) {
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+export default function Tablelist({handleOpen, searchTerm}) {
+    const [tableData, setTableData] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/products');    // API endpoint for fetching products
+                setTableData(response.data); // Assuming the response data is an array of products
+            }  catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
+    const filteredData = tableData.filter(product => 
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchTerm.toLowerCase())
+     );
+    
+        
+
 
     const products = [
         { id: 1, name: '27" LG 27QP88DP-BS LCD monitor', category: 'Monitor', price: '250 560 Ft' },
@@ -19,6 +44,9 @@ export default function Tablelist({handleOpen}) {
 
     return (
         <>
+
+            {error && <div className="error">{error}</div>}
+
             <div className="overflow-x-auto mt-10">
                 <table className="table table-zebra">
                     {/* head */}
@@ -34,7 +62,8 @@ export default function Tablelist({handleOpen}) {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {products.map((product) => (
+                        
+                        {filteredData.map((product) => (
                             <tr key={product.id}>
                                 <td>{product.name}</td>
                                 <td>{product.category}</td>

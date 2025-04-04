@@ -3,12 +3,14 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Tablelist from './components/Tablelist'
 import ModalForm from './components/ModalForm'
+import axios from 'axios'
 
 function App() {
   console.log('App komponens inicializálva'); // Ez a legelső kiírás
   
   const [isOpen, setIsOpen] = useState(false);
   const [modalMode, setModalMode] = useState('add');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleOpen = (mode) => {
     console.log('handleOpen');
@@ -30,10 +32,9 @@ function App() {
 
   return (
     console.log('App.jsx-ben isOpen:', isOpen),
-    
     <>
-      <Navbar onOpen={() => handleOpen('add')} />
-      <Tablelist handleOpen = {handleOpen} />
+      <Navbar onOpen={() => handleOpen('add')} onSearch={setSearchTerm} />
+      <Tablelist handleOpen = {handleOpen} searchTerm={searchTerm}/>
       <ModalForm isOpen={isOpen} OnSubmit={handleSubmit} onClose={() => setIsOpen(false)} mode={modalMode} />
     </>
   )

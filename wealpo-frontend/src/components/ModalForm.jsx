@@ -17,7 +17,7 @@ export default function ModalForm({ isOpen, onClose, mode, OnSubmit }) {
     if(mode === 'edit') {
         message = <p className="py-4">A módosítani kívánt adatokat írja át a megfelelő mezőkben</p>
     }else{
-        message = <p className="py-4">Kérem adja meg az új partner adatait!</p>
+        message = <p className="py-4">Kérem adja meg az új termék adatait!</p>
     }
 
     return (
@@ -25,7 +25,7 @@ export default function ModalForm({ isOpen, onClose, mode, OnSubmit }) {
             <dialog id="my_modal_3" className="modal" open={isOpen}>
                 <div className="modal-box">
                     <form method="dialog" onSubmit={handleSubmit}>
-                        <h3 className="font-bold text-lg">{mode === 'edit' ? 'Partner módosítása' : 'Partner hozzáadása'}</h3>
+                        <h3 className="font-bold text-lg">{mode === 'edit' ? 'Termék módosítása' : 'Termék hozzáadása'}</h3>
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={onClose}>✕</button>
                         {message}
                         <label className="input my-4">
@@ -39,7 +39,7 @@ export default function ModalForm({ isOpen, onClose, mode, OnSubmit }) {
                         </label>
                         <button type="submit" className={mode === 'edit' ? 'btn btn-accent' : 'btn btn-success'}>
                         
-                            {mode === 'edit' ? 'Változások mentése' : 'Partner hozzáadása'}
+                            {mode === 'edit' ? 'Változások mentése' : 'Termék hozzáadása'}
                         </button>
                     </form>
                 </div>

@@ -1,43 +1,31 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-export default function Tablelist({handleOpen, searchTerm}) {
-    const [tableData, setTableData] = useState([]);
+export default function Tablelist({handleOpen, tableData, setTableData, searchTerm}) {
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/products');    // API endpoint for fetching products
-                setTableData(response.data); // Assuming the response data is an array of products
-            }  catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-        fetchData();
-    }, []);
+
 
     const filteredData = tableData.filter(product => 
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.category.toLowerCase().includes(searchTerm.toLowerCase())
      );
     
-
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm('Biztosan törölni szeretné a terméket?');
-        if (confirmDelete){
+        if (confirmDelete) {
             try {
                 await axios.delete(`http://localhost:3000/api/products/${id}`); // API endpoint for deleting a product
-                TableData((prevData) => prevData.filter(product => product.id !== id)); // Remove the deleted product from the state
-                //setTableData(tableData.filter(product => product.id !== id)); // Remove the deleted product from the state
+                // Frissítsd a tableData állapotot a törölt elem eltávolításával
+                setTableData((prevData) => prevData.filter(product => product.id !== id));
             } catch (error) {
                 console.error('Error deleting product:', error);
+                setError('Nem sikerült törölni a terméket.');
             }
         }
-    }
-        
+    };
 
-
+    // Dummy data for testing
     const products = [
         { id: 1, name: '27" LG 27QP88DP-BS LCD monitor', category: 'Monitor', price: '250 560 Ft' },
         { id: 2, name: 'SAL BT 5000 Bluetooth Hangszóró, Fekete', category: 'Hangszóró', price: '23 990 Ft' },

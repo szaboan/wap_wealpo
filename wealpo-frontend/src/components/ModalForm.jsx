@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-export default function ModalForm({ isOpen, onClose, mode, OnSubmit }) {
+export default function ModalForm({ isOpen, onClose, mode, OnSubmit, productData }) {
     // Ha isOpen nem true, állítsuk false-ra
     isOpen = isOpen === true
 
@@ -8,10 +8,32 @@ export default function ModalForm({ isOpen, onClose, mode, OnSubmit }) {
     const [category, setCategory] = useState('')
     const [price, setPrice] = useState('')
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const productData = {name, category, price: Number(price)}
+            await OnSubmit(productData); // Hívjuk meg a szülő komponens OnSubmit függvényét
+            onClose(); // Bezárjuk a modalt
+        } catch (error) {
+            console.error('Error submitting form:', error); 
+        }
         onClose(); // Bezárjuk a modalt
     }
+
+    useEffect(() => {
+        if (mode === 'edit' && productData) {
+            // Ha szerkesztési módban vagyunk, töltsük be a termék adatait
+            setName(productData.name || '')
+            setCategory(productData.category || '')
+            setPrice(productData.price || '')
+        } else {
+            // Ha új terméket adunk hozzá, ürítsük ki a mezőket
+            setName('')
+            setCategory('')
+            setPrice('')
+        }
+    }, [mode, productData])
+
 
     let message = ''
     if(mode === 'edit') {

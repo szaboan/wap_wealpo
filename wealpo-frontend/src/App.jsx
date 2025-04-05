@@ -11,22 +11,30 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalMode, setModalMode] = useState('add');
   const [searchTerm, setSearchTerm] = useState('');
+  const [productData, setProductData] = useState([]);
 
-  const handleOpen = (mode) => {
-    console.log('handleOpen');
+  const handleOpen = (mode, product) => {
+    setProductData(product); // Beállítjuk a termékadatokat
     setIsOpen(true); // Megnyitjuk a modalt
-    console.log('1handleOpen - isOpen:', isOpen); // Kiírja az isOpen értékét
-
     setModalMode(mode); // Beállítjuk a módot
-    console.log('2handleOpen - isOpen:', isOpen); // Kiírja az isOpen értékét
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async (newProductData) => {
     console.log('handleSubmit');
     if (modalMode === 'add') {
       console.log('modal mode add');
+      try {
+          const response = await axios.post('http://localhost:3000/api/products', newProductData);    // API endpoint for fetching products
+      }  catch (error) {
+          console.error('Error fetching data:', error);
+      }
     } else {
       console.log('modal mode edit');
+      try {
+          const response = await axios.put(`http://localhost:3000/api/products/${productData.id}`, newProductData);    // API endpoint for fetching products
+      }  catch (error) {
+          console.error('Error fetching data:', error);
+      }
     }
   }
 
@@ -35,7 +43,8 @@ function App() {
     <>
       <Navbar onOpen={() => handleOpen('add')} onSearch={setSearchTerm} />
       <Tablelist handleOpen = {handleOpen} searchTerm={searchTerm}/>
-      <ModalForm isOpen={isOpen} OnSubmit={handleSubmit} onClose={() => setIsOpen(false)} mode={modalMode} />
+      <ModalForm isOpen={isOpen} OnSubmit={handleSubmit} 
+      onClose={() => setIsOpen(false)} mode={modalMode} productData={productData}/>
     </>
   )
 }

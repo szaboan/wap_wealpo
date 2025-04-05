@@ -22,6 +22,19 @@ export default function Tablelist({handleOpen, searchTerm}) {
         product.category.toLowerCase().includes(searchTerm.toLowerCase())
      );
     
+
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Biztosan törölni szeretné a terméket?');
+        if (confirmDelete){
+            try {
+                await axios.delete(`http://localhost:3000/api/products/${id}`); // API endpoint for deleting a product
+                TableData((prevData) => prevData.filter(product => product.id !== id)); // Remove the deleted product from the state
+                //setTableData(tableData.filter(product => product.id !== id)); // Remove the deleted product from the state
+            } catch (error) {
+                console.error('Error deleting product:', error);
+            }
+        }
+    }
         
 
 
@@ -69,10 +82,10 @@ export default function Tablelist({handleOpen, searchTerm}) {
                                 <td>{product.category}</td>
                                 <td>{product.price}</td>
                                 <td>
-                                    <button onClick={() => handleOpen('edit')} className="btn btn-soft btn-accent btn-sm">Módosítás</button>
+                                    <button onClick={() => handleOpen('edit',product)} className="btn btn-soft btn-accent btn-sm">Módosítás</button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-soft btn-error btn-sm">Törlés</button>
+                                    <button className="btn btn-soft btn-error btn-sm" onClick={() => handleDelete(product.id)}>Törlés</button>
                                 </td>
                             </tr>
                         ))}

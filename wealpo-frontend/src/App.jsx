@@ -41,6 +41,15 @@ function App() {
   }
 
   const handleSubmit = async (newProductData) => {
+
+    const { name, category, price } = newProductData;
+
+    // Ellenőrizzük, hogy legalább egy mező ki van-e töltve
+    if (!name && !category && !price) {
+      console.log('Nem lehet üres adatokat menteni!');
+      return; // Ha minden mező üres, kilépünk a függvényből
+    }
+    
     console.log('handleSubmit');
     if (modalMode === 'add') {
       console.log('modal mode add');

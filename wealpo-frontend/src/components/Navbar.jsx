@@ -29,7 +29,6 @@ export default function Navbar({ onOpen, onSearch }) {
       <div className="navbar bg-base-100 shadow-sm">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">wealPO</a>
-          <div class="badge badge-soft badge-primary">{getMenuName()}</div>
         </div>
         <div className="flex gap-2">
           {/* Csak a "Termékek" menüben jelenjen meg */}
@@ -39,7 +38,9 @@ export default function Navbar({ onOpen, onSearch }) {
               <a className="btn btn-outline btn-secondary" onClick={onOpen} >Termék hozzádása</a>
             </>
           )}
+          <div class="btn btn-primary">{getMenuName()}</div>
           <div className="dropdown dropdown-end">
+            
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img

@@ -4,6 +4,11 @@ import Navbar from './components/Navbar'
 import Tablelist from './components/Tablelist'
 import ModalForm from './components/ModalForm'
 import axios from 'axios'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'
+
+import Home from './pages/Home'
+import AboutUs from './pages/AboutUs'
+import Profile from './pages/Profile'
 
 function App() {
   console.log('App komponens inicializálva'); // Ez a legelső kiírás
@@ -57,13 +62,32 @@ function App() {
   }
 
   return (
-    console.log('App.jsx-ben isOpen:', isOpen),
+    // console.log('App.jsx-ben isOpen:', isOpen),
     <>
-      <Navbar onOpen={() => handleOpen('add')} onSearch={setSearchTerm} />
-      <Tablelist setTableData={setTableData} tableData={tableData}
-      handleOpen={handleOpen} searchTerm={searchTerm} />
-      <ModalForm isOpen={isOpen} OnSubmit={handleSubmit}
-        onClose={() => setIsOpen(false)} mode={modalMode} productData={productData} />
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                setTableData={setTableData}
+                tableData={tableData}
+                handleOpen={handleOpen}
+                searchTerm={searchTerm}
+                isOpen={isOpen}
+                modalMode={modalMode}
+                productData={productData}
+                handleSubmit={handleSubmit}
+                setSearchTerm={setSearchTerm}
+                setIsOpen={setIsOpen}
+              />
+            }
+          />
+          <Route path="/profil" element={<Profile />} />
+          <Route path="/rolunk" element={<AboutUs />} />
+        </Routes>
+      </Router>
+
     </>
   )
 }

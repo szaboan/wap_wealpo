@@ -55,6 +55,7 @@ export default function Navbar({ onOpen, onSearch }) {
               <li><Link to="/profil">Profil</Link></li>
               <li><Link to="/rolunk">Rólunk
                 <span className="badge">New</span></Link></li>
+              <li><Link to="/kapcsolat">Kapcsolat</Link></li>
             </ul>
           </div>
         </div>

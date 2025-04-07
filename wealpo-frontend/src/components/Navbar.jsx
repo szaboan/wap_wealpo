@@ -14,6 +14,8 @@ export default function Navbar({ onOpen, onSearch }) {
         return "Profil";
       case "/rolunk":
         return "Rólunk";
+      case "/kapcsolat":
+        return "Kapcsolat";
       default:
         return "Ismeretlen oldal";
     }
@@ -40,7 +42,7 @@ export default function Navbar({ onOpen, onSearch }) {
           )}
           <div class="btn btn-primary">{getMenuName()}</div>
           <div className="dropdown dropdown-end">
-            
+
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img

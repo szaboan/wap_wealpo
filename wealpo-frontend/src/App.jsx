@@ -9,6 +9,7 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import Profile from './pages/Profile'
+import Contact from './pages/Contact'
 
 function App() {
   console.log('App komponens inicializálva'); // Ez a legelső kiírás
@@ -94,6 +95,7 @@ function App() {
           />
           <Route path="/profil" element={<Profile />} />
           <Route path="/rolunk" element={<AboutUs />} />
+          <Route path="/kapcsolat" element={<Contact />} />
         </Routes>
       </Router>
 

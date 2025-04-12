@@ -10,7 +10,7 @@ export default function AboutUs() {
                 <div className="card w-80 bg-base-100 shadow-xl border border-base-300">
                     <figure className="px-10 pt-10">
                         <div className="avatar">
-                        <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <div className="w-24 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
                             <img src="https://scontent-vie1-1.xx.fbcdn.net/v/t39.30808-6/471472744_9825089590931540_1571267349740313943_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=dW_awLTVWIEQ7kNvwGW8JhE&_nc_oc=AdkMBY8-b63aw8_WEe6yuBK-0QMbFKOE8_CNTL8TFM2wZ7lTn9rCz8MEUt9okG3R4qhjHZdg_xxkrSYKscOVZCLR&_nc_zt=23&_nc_ht=scontent-vie1-1.xx&_nc_gid=Az0TEC-os37VHClVeIQMaQ&oh=00_AfFm0f1cuI_D4zGnCbqnwJy6i88wimoJkvQXg7LUgihokA&oe=67FFC233" alt="profilkép" />
                         </div>
                         </div>
